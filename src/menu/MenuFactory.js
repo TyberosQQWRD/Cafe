@@ -10,12 +10,17 @@
  *   принимает массив объектов из src/data/menu.js
  *   и возвращает массив готовых позиций меню.
  */
+import { Dessert } from './Dessert.js';
+import { Drink } from './Drink.js';
 export class MenuFactory {
   static create(type, data) {
-    throw new Error('Задача 2: MenuFactory.create ещё не реализован');
+    if(type === `drink`){return new Drink(data.name, data.price, data.size)}
+    else if(type === `dessert`){return new Dessert(data.name, data.price, data.isVegan)}
+    else
+    {throw new Error(`Неизвестный тип позиции: ${type}`)}
   }
 
   static createMenu(list) {
-    throw new Error('Задача 2: MenuFactory.createMenu ещё не реализован');
+    return list.map((item) => MenuFactory.create(item.type, item));
   }
 }
